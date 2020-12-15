@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostsApiController{
 
-    @Autowired
-    private PostsService postsService;
+    private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
