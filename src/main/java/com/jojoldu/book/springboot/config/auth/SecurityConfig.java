@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final customOAuth2UserService customOAuth2UserService;
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,8 +27,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userService(customOAuth2UserService);
 
     }
-
-
-
-
 }
