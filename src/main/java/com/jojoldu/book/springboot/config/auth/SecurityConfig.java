@@ -1,6 +1,6 @@
 package com.jojoldu.book.springboot.config.auth;
 
-import com.jojoldu.book.springboot.domain.user.Role;
+import com.jojoldu.book.springboot.domain.user.Position;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,14 +9,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final customOAuth2UserService customOAuth2UserService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+                http
+                .csrf().disable()
                 .headers().frameOptions().disable()
-                .and().authorizeRequests().antMatchers("/", "/css/**",
-                "/image/**", "/js/**", "/h2-console/**").permitAll()
-                .antMatchers("/api/v1/posts").hasRole(Role.USER.name())
+                .and()
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout()
@@ -25,6 +28,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
-
     }
 }

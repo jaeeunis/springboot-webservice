@@ -1,19 +1,18 @@
 package com.jojoldu.book.springboot.config.auth.dto;
-
-import com.jojoldu.book.springboot.domain.user.User;
-import lombok.Getter;
-
 import java.io.Serializable;
+
+import com.jojoldu.book.springboot.domain.user.Member;
+import lombok.Getter;
 
 @Getter
 public class SessionUser implements Serializable {
-    private String name;
-    private String email;
-    private String picture;
+    private String name ;
+    private String email ;
+    private String picture ;
 
-    public SessionUser(User user){
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.picture = user.getPicture();
+    public SessionUser(Member user) {
+        this.name = user.getName() ;
+        this.email = user.getEmail() ;
+        this.picture = user.getPicture() ;
     }
 }
